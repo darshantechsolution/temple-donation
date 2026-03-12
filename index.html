@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத் தேவங்குடி</title>
+<title>Temple Donation</title>
 
 <style>
 
@@ -103,6 +103,7 @@ localStorage.setItem("refer",refer);
 var upi="upi://pay?pa=stn.suthakar@oksbi&pn=Temple%20Donation&am="+amount+"&cu=INR";
 
 window.location.href=upi;
+
 });
 
 }
@@ -129,15 +130,17 @@ document.getElementById("rf").innerText=localStorage.getItem("refer");
 
 <img src="temple.jpg" class="topimg">
 
-<h2>🛕 ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத் தேவங்குடி </h2>
+<h2>🛕 Temple Statue Donation</h2>
 
-<input type="text" id="name" placeholder="பெயர்">
+<p>Your contribution helps us build the temple god statue.</p>
 
-<input type="text" id="place" placeholder="ஊர்">
+<input type="text" id="name" placeholder="Name">
 
-<input type="number" id="amount" placeholder="தொகை">
+<input type="text" id="place" placeholder="Place">
 
-<input type="text" id="refer" placeholder="பரிந்துரை செய்தவர்">
+<input type="number" id="amount" placeholder="Donation Amount">
+
+<input type="text" id="refer" placeholder="Referred By">
 
 <br><br>
 
@@ -145,23 +148,23 @@ document.getElementById("rf").innerText=localStorage.getItem("refer");
 
 <br><br>
 
-<button onclick="showReceipt()">திருப்பணி நன்கொடை செலுத்திவிட்டேன்</button>
+<button onclick="showReceipt()">I Have Completed Payment</button>
 
 <div id="receiptBox" class="receipt">
 
-<h3>🙏 நன்கொடை ரசீசு</h3>
+<h3>🙏 Donation Receipt</h3>
 
 <p><b>Receipt No:</b> <span id="r"></span></p>
 
-<p><b>பெயர்:</b> <span id="n"></span></p>
+<p><b>Name:</b> <span id="n"></span></p>
 
-<p><b>ஊர்:</b> <span id="p"></span></p>
+<p><b>Place:</b> <span id="p"></span></p>
 
-<p><b>தொகை:</b> ₹<span id="a"></span></p>
+<p><b>Amount:</b> ₹<span id="a"></span></p>
 
-<p><b>பரிந்துரை செய்தவர்:</b> <span id="rf"></span></p>
+<p><b>Referred By:</b> <span id="rf"></span></p>
 
-<p>நன்கொடை செலுத்தியமைக்கு நன்றி - ஃப்ரண்ட்ஸ் குரூப் & இளஞ்சிட்டு நண்பர்கள், புதுத்தேவங்குடி</p>
+<p>Thank you for supporting the temple statue creation.</p>
 
 <button class="print" onclick="window.print()">Print Receipt</button>
 
