@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -25,8 +27,10 @@ border-radius:10px;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-h1{
-color:#b22222;
+.topimg{
+width:100%;
+border-radius:10px;
+margin-bottom:15px;
 }
 
 input{
@@ -35,7 +39,6 @@ padding:12px;
 margin:8px;
 border-radius:5px;
 border:1px solid #ccc;
-font-size:15px;
 }
 
 button{
@@ -46,7 +49,6 @@ padding:14px 25px;
 font-size:16px;
 border-radius:6px;
 cursor:pointer;
-margin-top:10px;
 }
 
 button:hover{
@@ -76,29 +78,45 @@ var amount=document.getElementById("amount").value;
 var refer=document.getElementById("refer").value;
 
 if(name=="" || amount==""){
-alert("Please fill required fields");
+alert("Please fill Name and Amount");
 return;
 }
 
-localStorage.setItem("donorName",name);
-localStorage.setItem("donorPlace",place);
-localStorage.setItem("donorAmount",amount);
-localStorage.setItem("donorRefer",refer);
+fetch("YOUR_GOOGLE_SCRIPT_URL",{
+method:"POST",
+body:new URLSearchParams({
+name:name,
+place:place,
+amount:amount,
+refer:refer
+})
+})
+.then(res=>res.text())
+.then(receipt=>{
 
-var upi="upi://pay?pa=stn.suthakar@oksbi&pn=Temple Donation&am="+amount+"&cu=INR&tn=Temple Donation";
+localStorage.setItem("receipt",receipt);
+localStorage.setItem("name",name);
+localStorage.setItem("place",place);
+localStorage.setItem("amount",amount);
+localStorage.setItem("refer",refer);
+
+var upi="upi://pay?pa=stn.suthakar@oksbi&pn=Temple%20Donation&am="+amount+"&cu=INR";
 
 window.location.href=upi;
+
+});
 
 }
 
 function showReceipt(){
 
-document.getElementById("donorName").innerText=localStorage.getItem("donorName");
-document.getElementById("donorPlace").innerText=localStorage.getItem("donorPlace");
-document.getElementById("donorAmount").innerText=localStorage.getItem("donorAmount");
-document.getElementById("donorRefer").innerText=localStorage.getItem("donorRefer");2
+document.getElementById("receiptBox").style.display="block";
 
-document.getElementById("receipt").style.display="block";
+document.getElementById("r").innerText=localStorage.getItem("receipt");
+document.getElementById("n").innerText=localStorage.getItem("name");
+document.getElementById("p").innerText=localStorage.getItem("place");
+document.getElementById("a").innerText=localStorage.getItem("amount");
+document.getElementById("rf").innerText=localStorage.getItem("refer");
 
 }
 
@@ -106,11 +124,13 @@ document.getElementById("receipt").style.display="block";
 
 </head>
 
-<body onload="showReceipt()">
+<body>
 
 <div class="container">
 
-<h1>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத் தேவங்குடி</h1>
+<img src="temple.jpg" class="topimg">
+
+<h2>🛕 ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத் தேவங்குடி </h2>
 
 <input type="text" id="name" placeholder="பெயர்">
 
@@ -120,23 +140,29 @@ document.getElementById("receipt").style.display="block";
 
 <input type="text" id="refer" placeholder="பரிந்துரை செய்தவர்">
 
-<br>
+<br><br>
 
 <button onclick="payNow()">Pay via GPay / PhonePe</button>
 
-<div id="receipt" class="receipt">
+<br><br>
 
-<h2>🙏 Donation Receipt</h2>
+<button onclick="showReceipt()">திருப்பணி நன்கொடை செலுத்திவிட்டேன்</button>
 
-<p><b>பெயர்:</b> <span id="donorName"></span></p>
+<div id="receiptBox" class="receipt">
 
-<p><b>ஊர்:</b> <span id="donorPlace"></span></p>
+<h3>🙏 நன்கொடை ரசீசு</h3>
 
-<p><b>தொகை:</b> ₹<span id="donorAmount"></span></p>
+<p><b>Receipt No:</b> <span id="r"></span></p>
 
-<p><b>பரிந்துரை செய்தவர்:</b> <span id="donorRefer"></span></p>
+<p><b>பெயர்:</b> <span id="n"></span></p>
 
-<p>திருப்பணி நன்கொடை அளித்தமைக்கு நன்றி - ஃப்ரண்ட்ஸ் குரூப் & இளஞ்சிட்டு நண்பர்கள், புதுத்தேவங்குடி</p>
+<p><b>ஊர்:</b> <span id="p"></span></p>
+
+<p><b>தொகை:</b> ₹<span id="a"></span></p>
+
+<p><b>பரிந்துரை செய்தவர்:</b> <span id="rf"></span></p>
+
+<p>நன்கொடை செலுத்தியமைக்கு நன்றி - ஃப்ரண்ட்ஸ் குரூப் & இளஞ்சிட்டு நண்பர்கள், புதுத்தேவங்குடி</p>
 
 <button class="print" onclick="window.print()">Print Receipt</button>
 
