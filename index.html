@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Temple Donation</title>
+<title>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத் தேவங்குடி</title>
 
 <style>
 
@@ -85,7 +85,7 @@ localStorage.setItem("donorPlace",place);
 localStorage.setItem("donorAmount",amount);
 localStorage.setItem("donorRefer",refer);
 
-var upi="upi://pay?pa=YOURUPI@okaxis&pn=Temple Donation&am="+amount+"&cu=INR&tn=Temple Donation";
+var upi="upi://pay?pa=stn.suthakar@oksbi&pn=Temple Donation&am="+amount+"&cu=INR&tn=Temple Donation";
 
 window.location.href=upi;
 
@@ -96,7 +96,7 @@ function showReceipt(){
 document.getElementById("donorName").innerText=localStorage.getItem("donorName");
 document.getElementById("donorPlace").innerText=localStorage.getItem("donorPlace");
 document.getElementById("donorAmount").innerText=localStorage.getItem("donorAmount");
-document.getElementById("donorRefer").innerText=localStorage.getItem("donorRefer");
+document.getElementById("donorRefer").innerText=localStorage.getItem("donorRefer");2
 
 document.getElementById("receipt").style.display="block";
 
@@ -110,17 +110,15 @@ document.getElementById("receipt").style.display="block";
 
 <div class="container">
 
-<h1>🛕 Temple Statue Donation</h1>
+<h1>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத் தேவங்குடி</h1>
 
-<p>Your contribution helps us build the temple god statue.</p>
+<input type="text" id="name" placeholder="பெயர்">
 
-<input type="text" id="name" placeholder="Name">
+<input type="text" id="place" placeholder="ஊர்">
 
-<input type="text" id="place" placeholder="Place">
+<input type="number" id="amount" placeholder="தொகை">
 
-<input type="number" id="amount" placeholder="Donation Amount">
-
-<input type="text" id="refer" placeholder="Referred By">
+<input type="text" id="refer" placeholder="பரிந்துரை செய்தவர்">
 
 <br>
 
@@ -130,15 +128,15 @@ document.getElementById("receipt").style.display="block";
 
 <h2>🙏 Donation Receipt</h2>
 
-<p><b>Name:</b> <span id="donorName"></span></p>
+<p><b>பெயர்:</b> <span id="donorName"></span></p>
 
-<p><b>Place:</b> <span id="donorPlace"></span></p>
+<p><b>ஊர்:</b> <span id="donorPlace"></span></p>
 
-<p><b>Amount:</b> ₹<span id="donorAmount"></span></p>
+<p><b>தொகை:</b> ₹<span id="donorAmount"></span></p>
 
-<p><b>Referred By:</b> <span id="donorRefer"></span></p>
+<p><b>பரிந்துரை செய்தவர்:</b> <span id="donorRefer"></span></p>
 
-<p>Thank you for supporting the temple statue creation.</p>
+<p>திருப்பணி நன்கொடை அளித்தமைக்கு நன்றி - ஃப்ரண்ட்ஸ் குரூப் & இளஞ்சிட்டு நண்பர்கள், புதுத்தேவங்குடி</p>
 
 <button class="print" onclick="window.print()">Print Receipt</button>
 
