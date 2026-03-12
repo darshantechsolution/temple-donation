@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத்தேவங்குடி</title>
+<title>Temple Donation</title>
 
 <style>
 
@@ -71,7 +71,7 @@ background:#333;
 function payNow(){
 
 var name=document.getElementById("name").value;
-var place=document.getElementById("palce").value;
+var place=document.getElementById("place").value;
 var amount=document.getElementById("amount").value;
 var refer=document.getElementById("refer").value;
 
@@ -81,11 +81,11 @@ return;
 }
 
 localStorage.setItem("donorName",name);
-localStorage.setItem("donorPlace",palce);
+localStorage.setItem("donorPlace",place);
 localStorage.setItem("donorAmount",amount);
-localStorage.setItem("donorRefer",Referred By);
+localStorage.setItem("donorRefer",refer);
 
-var upi="upi://pay?pa=stn.suthakar@oksbi&pn=Temple Donation&am="+amount+"&cu=INR&tn=Temple Donation";
+var upi="upi://pay?pa=YOURUPI@okaxis&pn=Temple Donation&am="+amount+"&cu=INR&tn=Temple Donation";
 
 window.location.href=upi;
 
@@ -110,17 +110,17 @@ document.getElementById("receipt").style.display="block";
 
 <div class="container">
 
-<h1>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத்தேவங்குடி</h1>
+<h1>🛕 Temple Statue Donation</h1>
 
-<p>உங்கள் பங்களிப்பு, அம்மன் சிலையை உருவாக்க எங்களுக்கு உதவுகிறது..</p>
+<p>Your contribution helps us build the temple god statue.</p>
 
-<input type="text" id="name" placeholder="பெயர்">
+<input type="text" id="name" placeholder="Name">
 
-<input type="text" id="place" placeholder="ஊர்">
+<input type="text" id="place" placeholder="Place">
 
-<input type="number" id="amount" placeholder="தொகை">
+<input type="number" id="amount" placeholder="Donation Amount">
 
-<input type="text" id="refer" placeholder="பரிந்துரைத்தவர் பெயர்">
+<input type="text" id="refer" placeholder="Referred By">
 
 <br>
 
@@ -130,15 +130,15 @@ document.getElementById("receipt").style.display="block";
 
 <h2>🙏 Donation Receipt</h2>
 
-<p><b>பெயர்:</b> <span id="donorName"></span></p>
+<p><b>Name:</b> <span id="donorName"></span></p>
 
-<p><b>ஊர்:</b> <span id="donorPlace"></span></p>
+<p><b>Place:</b> <span id="donorPlace"></span></p>
 
-<p><b>தொகை:</b> ₹<span id="donorAmount"></span></p>
+<p><b>Amount:</b> ₹<span id="donorAmount"></span></p>
 
-<p><b>பரிந்துரைத்தவர் பெயர்:</b> <span id="donorRefer"></span></p>
+<p><b>Referred By:</b> <span id="donorRefer"></span></p>
 
-<p>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணிக்கு நன்கொடை அளித்தமைக்கு எங்களின் மனமார்ந்த நன்றி - ஃப்ரண்ட்ஸ் குரூப் & இளஞ்சிட்டு நண்பர்கள், புதுத்தேவங்குடி.</p>
+<p>Thank you for supporting the temple statue creation.</p>
 
 <button class="print" onclick="window.print()">Print Receipt</button>
 
