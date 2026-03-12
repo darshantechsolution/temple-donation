@@ -100,10 +100,12 @@ localStorage.setItem("place",place);
 localStorage.setItem("amount",amount);
 localStorage.setItem("refer",refer);
 
-var upi="upi://pay?pa=stn.suthakar@oksbi&pn=Temple%20Donation&am="+amount+"&cu=INR";
+var txn="TXN"+Date.now();
 
-window.location.href=upi;
+var upi="upi://pay?pa=stn.suthakar@oksbi&pn=Temple%20Donation&am="+amount+"&cu=INR&tn=Temple%20Donation&tr="+txn;
 
+window.location.href = upi;
+  
 });
 
 }
