@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத்தேவங்குடி</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+margin:0;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+color:#b22222;
+}
+
+input{
+width:90%;
+padding:12px;
+margin:8px;
+border-radius:5px;
+border:1px solid #ccc;
+font-size:15px;
+}
+
+button{
+background:#0f9d58;
+color:white;
+border:none;
+padding:14px 25px;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#0c7f47;
+}
+
+.receipt{
+display:none;
+margin-top:20px;
+border-top:1px solid #ddd;
+padding-top:20px;
+}
+
+.print{
+background:#333;
+}
+
+</style>
+
+<script>
+
+function payNow(){
+
+var name=document.getElementById("பெயர்").value;
+var place=document.getElementById("ஊர்").value;
+var amount=document.getElementById("தொகை").value;
+var refer=document.getElementById("பரிந்துரைத்தவர்_பெயர்").value;
+
+if(name=="" || amount==""){
+alert("Please fill required fields");
+return;
+}
+
+localStorage.setItem("donorName",பெயர்);
+localStorage.setItem("donorPlace",ஊர்);
+localStorage.setItem("donorAmount",தொகை);
+localStorage.setItem("donorRefer",பரிந்துரைத்தவர்_பெயர்);
+
+var upi="upi://pay?pa=stn.suthakar@oksbi&pn=Temple Donation&am="+amount+"&cu=INR&tn=Temple Donation";
+
+window.location.href=upi;
+
+}
+
+function showReceipt(){
+
+document.getElementById("donorName").innerText=localStorage.getItem("donorName");
+document.getElementById("donorPlace").innerText=localStorage.getItem("donorPlace");
+document.getElementById("donorAmount").innerText=localStorage.getItem("donorAmount");
+document.getElementById("donorRefer").innerText=localStorage.getItem("donorRefer");
+
+document.getElementById("receipt").style.display="block";
+
+}
+
+</script>
+
+</head>
+
+<body onload="showReceipt()">
+
+<div class="container">
+
+<h1>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணி நன்கொடை - புதுத்தேவங்குடி</h1>
+
+<p>உங்கள் பங்களிப்பு, அம்மன் சிலையை உருவாக்க எங்களுக்கு உதவுகிறது..</p>
+
+<input type="text" id="name" placeholder="பெயர்">
+
+<input type="text" id="place" placeholder="ஊர்">
+
+<input type="number" id="amount" placeholder="தொகை">
+
+<input type="text" id="refer" placeholder="பரிந்துரைத்தவர் பெயர்">
+
+<br>
+
+<button onclick="payNow()">Pay via GPay / PhonePe</button>
+
+<div id="receipt" class="receipt">
+
+<h2>🙏 Donation Receipt</h2>
+
+<p><b>பெயர்:</b> <span id="donorName"></span></p>
+
+<p><b>ஊர்:</b> <span id="donorPlace"></span></p>
+
+<p><b>தொகை:</b> ₹<span id="donorAmount"></span></p>
+
+<p><b>பரிந்துரைத்தவர் பெயர்:</b> <span id="donorRefer"></span></p>
+
+<p>ஸ்ரீ முத்து மாரியம்மன் கோவில் திருப்பணிக்கு நன்கொடை அளித்தமைக்கு எங்களின் மனமார்ந்த நன்றி - ஃப்ரண்ட்ஸ் குரூப் & இளஞ்சிட்டு நண்பர்கள், புதுத்தேவங்குடி.</p>
+
+<button class="print" onclick="window.print()">Print Receipt</button>
+
+</div>
+
+</div>
+
+</body>
+</html>
