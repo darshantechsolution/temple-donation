@@ -35,6 +35,7 @@ padding:12px;
 margin:8px;
 border:1px solid #ccc;
 border-radius:5px;
+font-size:16px;
 }
 
 button{
@@ -81,17 +82,17 @@ font-size:14px;
 
 function payNow(){
 
-var name=document.getElementById("name").value;
-var place=document.getElementById("place").value;
-var amount=document.getElementById("amount").value;
-var refer=document.getElementById("refer").value;
+var name=document.getElementById("name").value.trim();
+var place=document.getElementById("place").value.trim();
+var amount=document.getElementById("amount").value.trim();
+var refer=document.getElementById("refer").value.trim();
 
 if(name=="" || amount==""){
 alert("Please fill Name and Amount");
 return;
 }
 
-amount=parseInt(amount);
+amount = amount.replace(/[^0-9]/g,'');
 
 fetch("YOUR_GOOGLE_SCRIPT_URL",{
 method:"POST",
@@ -113,7 +114,7 @@ localStorage.setItem("refer",refer);
 
 var txn="TXN"+Date.now();
 
-var upi="upi://pay?pa=stn.suthakar@sbi&pn=Temple%20Donation&am="+amount+"&cu=INR&tn=Temple%20Donation&tr="+txn;
+var upi="upi://pay?pa=YOURUPI@okaxis&pn=Temple%20Donation&am="+amount+"&cu=INR&tn=Temple%20Donation&tr="+txn;
 
 window.location.href=upi;
 
@@ -154,7 +155,7 @@ row.insertCell(2).innerHTML="₹"+localStorage.getItem("amount");
 
 <div class="container">
 
-<img src="temple.jpg" class="topimg">
+<img src="temple.jpg" class="topimg" alt="Temple">
 
 <h2>🛕 Temple Statue Donation</h2>
 
@@ -174,7 +175,7 @@ row.insertCell(2).innerHTML="₹"+localStorage.getItem("amount");
 
 <br><br>
 
-<img src="upi-qr.png" class="qr">
+<img src="upi-qr.png" class="qr" alt="UPI QR">
 
 <p>Scan QR if payment app does not open</p>
 
