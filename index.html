@@ -19,13 +19,13 @@ max-width:500px;
 margin:auto;
 background:white;
 padding:20px;
-border-radius:10px;
+border-radius:12px;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 .topimg{
 width:100%;
-border-radius:10px;
+border-radius:12px;
 margin-bottom:15px;
 }
 
@@ -53,6 +53,11 @@ button:hover{
 background:#0c7f47;
 }
 
+.qr{
+width:220px;
+margin-top:15px;
+}
+
 .receipt{
 display:none;
 margin-top:20px;
@@ -60,25 +65,53 @@ padding-top:15px;
 border-top:1px solid #ddd;
 }
 
-.qr{
-width:220px;
-margin-top:15px;
-}
-
 table{
 width:100%;
-margin-top:20px;
 border-collapse:collapse;
+margin-top:15px;
 }
 
 th,td{
 border:1px solid #ddd;
-padding:8px;
+padding:10px;
 font-size:14px;
+}
+
+th{
+background:#f5f5f5;
 }
 </style>
 
 <script>
+
+function loadDonors(){
+
+fetch("YOUR_SCRIPT_URL")
+.then(res=>res.json())
+.then(data=>{
+
+document.getElementById("totalAmount").innerText="₹"+data.total;
+
+let percent=(data.total/100000)*100;
+if(percent>100) percent=100;
+
+document.getElementById("progressBar").style.width=percent+"%";
+
+var table=document.getElementById("donorTable");
+
+for(let i=0;i<data.donors.length;i++){
+
+var row=table.insertRow(-1);
+
+row.insertCell(0).innerHTML=data.donors[i].name;
+row.insertCell(1).innerHTML=data.donors[i].place;
+row.insertCell(2).innerHTML="₹"+data.donors[i].amount;
+
+}
+
+});
+
+}
 
 function payNow(){
 
@@ -92,9 +125,9 @@ alert("Please fill Name and Amount");
 return;
 }
 
-amount = amount.replace(/[^0-9]/g,'');
+amount=amount.replace(/[^\d]/g,'');
 
-fetch("YOUR_GOOGLE_SCRIPT_URL",{
+fetch("https://script.google.com/macros/s/AKfycbwSVkEp0Jb-U7aVxswsLo7aOWNHPxj4SMhwVu3aPKxKsS4L5eWwx5c6kMbnt8FjOCs/exec",{
 method:"POST",
 body:new URLSearchParams({
 name:name,
@@ -114,7 +147,7 @@ localStorage.setItem("refer",refer);
 
 var txn="TXN"+Date.now();
 
-var upi="upi://pay?pa=9688105159@upi&pn=Temple%20Donation&am="+amount+"&cu=INR&tn=Temple%20Donation&tr="+txn;
+var upi="upi://pay?pa=stn.suthakar@sbi&pn=Temple%20Donation&am="+amount+"&cu=INR&tn=Temple%20Donation&tr="+txn;
 
 window.location.href=upi;
 
@@ -132,21 +165,9 @@ document.getElementById("p").innerText=localStorage.getItem("place");
 document.getElementById("a").innerText=localStorage.getItem("amount");
 document.getElementById("rf").innerText=localStorage.getItem("refer");
 
-addDonor();
-
 }
 
-function addDonor(){
-
-var table=document.getElementById("donorTable");
-
-var row=table.insertRow(-1);
-
-row.insertCell(0).innerHTML=localStorage.getItem("name");
-row.insertCell(1).innerHTML=localStorage.getItem("place");
-row.insertCell(2).innerHTML="₹"+localStorage.getItem("amount");
-
-}
+window.onload=loadDonors;
 
 </script>
 </head>
@@ -155,13 +176,23 @@ row.insertCell(2).innerHTML="₹"+localStorage.getItem("amount");
 
 <div class="container">
 
-<img src="temple.jpg" class="topimg" alt="Temple">
+<img src="temple-banner.jpg" class="topimg" alt="Temple">
 
-<h2>🛕 Temple Statue Donation</h2>
+<h2>🛕 Temple Statue Donation Fund-1</h2>
 
-<p>Your contribution helps us build the temple god statue.</p>
+<p>Support the sacred work of building our temple god statue 🙏</p>
 
-<input type="text" id="name" placeholder="Name">
+<h3>Donation Progress</h3>
+
+<div style="background:#ddd;border-radius:20px;height:25px;overflow:hidden;">
+<div id="progressBar" style="width:0%;background:#0f9d58;height:25px;color:white;line-height:25px;">
+<span id="totalAmount">₹0</span> / ₹1,00,000
+</div>
+</div>
+
+<br>
+
+<input type="text" id="name" placeholder="Your Name">
 
 <input type="text" id="place" placeholder="Place">
 
@@ -185,7 +216,7 @@ row.insertCell(2).innerHTML="₹"+localStorage.getItem("amount");
 
 <div id="receiptBox" class="receipt">
 
-<h3>🙏 Donation Receipt</h3>
+<h3>🧾 Donation Receipt</h3>
 
 <p><b>Receipt No:</b> <span id="r"></span></p>
 <p><b>Name:</b> <span id="n"></span></p>
@@ -197,7 +228,7 @@ row.insertCell(2).innerHTML="₹"+localStorage.getItem("amount");
 
 </div>
 
-<h3>Recent Donors</h3>
+<h3>👥 Recent Donors</h3>
 
 <table id="donorTable">
 <tr>
