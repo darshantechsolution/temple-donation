@@ -82,7 +82,7 @@ alert("Please fill Name and Amount");
 return;
 }
 
-fetch("https://script.google.com/macros/s/AKfycbwyLxb0T7xEmmpefuRajl9C-RcGCJMSoq6rsNN9DOdGydF1KC72VemWHQbR9t9dUimX/exec",{
+fetch("YOUR_GOOGLE_SCRIPT_URL",{
 method:"POST",
 body:new URLSearchParams({
 name:name,
@@ -100,12 +100,10 @@ localStorage.setItem("place",place);
 localStorage.setItem("amount",amount);
 localStorage.setItem("refer",refer);
 
-var txn="TXN"+Date.now();
+var upi="upi://pay?pa=YOURUPI@okaxis&pn=Temple%20Donation&am="+amount+"&cu=INR";
 
-var upi="upi://pay?pa=stn.suthakar@sbi&pn=Temple%20Donation&am="+amount+"&cu=INR&tn=Temple%20Donation&tr="+txn;
+window.location.href=upi;
 
-window.location.href = upi;
-  
 });
 
 }
@@ -131,6 +129,10 @@ document.getElementById("rf").innerText=localStorage.getItem("refer");
 <div class="container">
 
 <img src="temple.jpg" class="topimg">
+
+<h2>🛕 Temple Statue Donation</h2>
+
+<p>Your contribution helps us build the temple god statue.</p>
 
 <input type="text" id="name" placeholder="Name">
 
