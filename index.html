@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Temple Donation</title>
 
 <style>
-
 body{
 font-family:Arial;
 background:#f2f2f2;
-margin:0;
-padding:20px;
 text-align:center;
+padding:20px;
+margin:0;
 }
 
 .container{
 max-width:500px;
 margin:auto;
 background:white;
-padding:25px;
+padding:20px;
 border-radius:10px;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
@@ -37,18 +33,19 @@ input{
 width:90%;
 padding:12px;
 margin:8px;
-border-radius:5px;
 border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
 background:#0f9d58;
 color:white;
 border:none;
-padding:14px 25px;
-font-size:16px;
+padding:14px 20px;
 border-radius:6px;
+font-size:16px;
 cursor:pointer;
+margin-top:10px;
 }
 
 button:hover{
@@ -58,14 +55,26 @@ background:#0c7f47;
 .receipt{
 display:none;
 margin-top:20px;
+padding-top:15px;
 border-top:1px solid #ddd;
-padding-top:20px;
 }
 
-.print{
-background:#333;
+.qr{
+width:220px;
+margin-top:15px;
 }
 
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+font-size:14px;
+}
 </style>
 
 <script>
@@ -81,6 +90,8 @@ if(name=="" || amount==""){
 alert("Please fill Name and Amount");
 return;
 }
+
+amount=parseInt(amount);
 
 fetch("YOUR_GOOGLE_SCRIPT_URL",{
 method:"POST",
@@ -100,7 +111,9 @@ localStorage.setItem("place",place);
 localStorage.setItem("amount",amount);
 localStorage.setItem("refer",refer);
 
-var upi="upi://pay?pa=stn.suthakar@sbi&pn=Temple%20Donation&am="+amount+"&cu=INR";
+var txn="TXN"+Date.now();
+
+var upi="upi://pay?pa=stn.suthakar@sbi&pn=Temple%20Donation&am="+amount+"&cu=INR&tn=Temple%20Donation&tr="+txn;
 
 window.location.href=upi;
 
@@ -118,10 +131,23 @@ document.getElementById("p").innerText=localStorage.getItem("place");
 document.getElementById("a").innerText=localStorage.getItem("amount");
 document.getElementById("rf").innerText=localStorage.getItem("refer");
 
+addDonor();
+
+}
+
+function addDonor(){
+
+var table=document.getElementById("donorTable");
+
+var row=table.insertRow(-1);
+
+row.insertCell(0).innerHTML=localStorage.getItem("name");
+row.insertCell(1).innerHTML=localStorage.getItem("place");
+row.insertCell(2).innerHTML="₹"+localStorage.getItem("amount");
+
 }
 
 </script>
-
 </head>
 
 <body>
@@ -138,15 +164,21 @@ document.getElementById("rf").innerText=localStorage.getItem("refer");
 
 <input type="text" id="place" placeholder="Place">
 
-<input type="number" id="amount" placeholder="Donation Amount">
+<input type="tel" id="amount" placeholder="Donation Amount">
 
 <input type="text" id="refer" placeholder="Referred By">
 
-<br><br>
+<br>
 
 <button onclick="payNow()">Pay via GPay / PhonePe</button>
 
 <br><br>
+
+<img src="upi-qr.png" class="qr">
+
+<p>Scan QR if payment app does not open</p>
+
+<br>
 
 <button onclick="showReceipt()">I Have Completed Payment</button>
 
@@ -155,20 +187,24 @@ document.getElementById("rf").innerText=localStorage.getItem("refer");
 <h3>🙏 Donation Receipt</h3>
 
 <p><b>Receipt No:</b> <span id="r"></span></p>
-
 <p><b>Name:</b> <span id="n"></span></p>
-
 <p><b>Place:</b> <span id="p"></span></p>
-
 <p><b>Amount:</b> ₹<span id="a"></span></p>
-
 <p><b>Referred By:</b> <span id="rf"></span></p>
 
-<p>Thank you for supporting the temple statue creation.</p>
-
-<button class="print" onclick="window.print()">Print Receipt</button>
+<button onclick="window.print()">Print Receipt</button>
 
 </div>
+
+<h3>Recent Donors</h3>
+
+<table id="donorTable">
+<tr>
+<th>Name</th>
+<th>Place</th>
+<th>Amount</th>
+</tr>
+</table>
 
 </div>
 
