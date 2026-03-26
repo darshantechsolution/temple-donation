@@ -170,6 +170,12 @@ document.getElementById("rf").innerText=localStorage.getItem("refer");
 window.onload=loadDonors;
 
 </script>
+  <script>
+function payNow() {
+    let amount = document.getElementById("amt").value;
+    window.location.href = `upi://pay?pa=yourupiid@bank&pn=Your Name&am=${amount}&cu=INR`;
+}
+</script>
 </head>
 
 <body>
@@ -202,7 +208,8 @@ window.onload=loadDonors;
 
 <br>
 
-<button onclick="payNow()">Pay via GPay / PhonePe</button>
+<input type="number" id="amt" placeholder="Enter Amount">
+<button onclick="payNow()">Pay</button>
 
 <br><br>
 
